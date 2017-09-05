@@ -1,38 +1,24 @@
-# docker-rails-vue
+# README
 
-### 1.
-`docker-compose run --rm web bundle exec rails new . --force --database=postgresql --skip-bundle`
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-### 2. 
+Things you may want to cover:
 
-```
-# gemfile
-- # gem 'therubyracer', platforms: :ruby
-+ gem 'therubyracer', platforms: :ruby
-+ gem 'webpacker', github: 'rails/webpacker'
-```
-### 3.
-`docker-compose run --rm web bundle update`
+* Ruby version
 
-`docker-compose build`
+* System dependencies
 
-### 4.
+* Configuration
 
-```
-# config/database.yml
-+  username: postgres
-+  password: <%= ENV['POSTGRES_PASSWORD'] %>
-+  host: db
-```
+* Database creation
 
-### 5.
+* Database initialization
 
-`docker-compose run --rm web rake db:create`
+* How to run the test suite
 
-### 6.
+* Services (job queues, cache servers, search engines, etc.)
 
-`docker-compose run --rm web rails webpacker:install`
+* Deployment instructions
 
-### 7.
-
-`docker-compose run --rm web rails webpacker:install:vue`
+* ...
