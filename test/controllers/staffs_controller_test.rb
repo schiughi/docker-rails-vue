@@ -17,7 +17,7 @@ class StaffsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create staff" do
     assert_difference('Staff.count') do
-      post staffs_url, params: { staff: { index: @staff.index } }
+      post staffs_url, params: { staff: {  } }
     end
 
     assert_redirected_to staff_url(Staff.last)
@@ -34,7 +34,7 @@ class StaffsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update staff" do
-    patch staff_url(@staff), params: { staff: { index: @staff.index } }
+    patch staff_url(@staff), params: { staff: {  } }
     assert_redirected_to staff_url(@staff)
   end
 

@@ -2,6 +2,8 @@ version: '2'
 services:
   db: 
     image: postgres
+    ports:
+      - "3333:3333"
     volumes:
       - postgres:/var/lib/pgsql
     extends:

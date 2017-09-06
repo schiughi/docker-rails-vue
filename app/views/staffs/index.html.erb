@@ -5,7 +5,9 @@
 <table>
   <thead>
     <tr>
-      <th>Index</th>
+      <th>name</th>
+      <th>age</th>
+      <th>joined on</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,7 +15,9 @@
   <tbody>
     <% @staffs.each do |staff| %>
       <tr>
-        <td><%= staff.index %></td>
+        <td><%= staff.name  %></td>
+        <td><%= staff.age %></td>
+        <td><%= staff.joined_on %></td>
         <td><%= link_to 'Show', staff %></td>
         <td><%= link_to 'Edit', edit_staff_path(staff) %></td>
         <td><%= link_to 'Destroy', staff, method: :delete, data: { confirm: 'Are you sure?' } %></td>
