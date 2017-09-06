@@ -7,6 +7,12 @@ class StaffsController < ApplicationController
     @staffs = Staff.all
   end
 
+  # GET /staffs/search
+  # GET /staffs/search.json
+  def search
+    @staffs = Staff.all
+  end
+
   # GET /staffs/1
   # GET /staffs/1.json
   def show
