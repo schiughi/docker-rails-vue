@@ -8,3 +8,31 @@
 // layout file, like app/views/layouts/application.html.erb
 
 import Vue from 'vue/dist/vue.esm'
+import axios from 'axios'
+
+document.addEventListener('DOMContentLoaded', () => {
+  const app = new Vue({
+     el: '#el-index',
+     data: {
+       columns: ["name" , "age" , "joined on"],
+       staffs: []
+     },
+     created: function(){
+        this.search()
+     },
+     methods:{
+       search: function(){
+         axios.get('/staffs/search',{
+          headers: { 'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content }
+         })
+         .then((response) => {
+          console.log(response);
+          this.staffs = response.data.staffs;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+       }
+     }
+   })
+})
