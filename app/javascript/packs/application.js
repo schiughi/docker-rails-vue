@@ -15,15 +15,24 @@ document.addEventListener('DOMContentLoaded', () => {
      el: '#el-index',
      data: {
        columns: ["name" , "age" , "joined on"],
-       staffs: []
+       staffs: [],
+       query: {
+         age_gt: 20,
+         name_cont: "Mr"
+       }
      },
      created: function(){
         this.search()
      },
      methods:{
        search: function(){
-         axios.get('/staffs/search',{
-          headers: { 'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content }
+         axios.get('/api/staffs/search',{
+          headers: { 
+            'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+         },
+          params:{
+           q: JSON.stringify(this.query)
+          }
          })
          .then((response) => {
           console.log(response);

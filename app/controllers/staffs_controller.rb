@@ -1,5 +1,6 @@
 class StaffsController < ApplicationController
   before_action :set_staff, only: [:show, :edit, :update, :destroy]
+  before_action :parse_params , only: :search
 
   # GET /staffs
   # GET /staffs.json
@@ -10,7 +11,7 @@ class StaffsController < ApplicationController
   # GET /staffs/search
   # GET /staffs/search.json
   def search
-    @staffs = Staff.all
+    @staffs = Staff.where("age > ?" , @query["age_gt"])
   end
 
   # GET /staffs/1
@@ -76,5 +77,9 @@ class StaffsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def staff_params
       params.fetch(:staff, {})
+    end
+
+    def parse_params
+      @query = JSON.parse params[:q]
     end
 end
