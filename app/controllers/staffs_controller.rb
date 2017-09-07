@@ -2,20 +2,19 @@ class StaffsController < ApplicationController
   before_action :set_staff, only: [:show, :edit, :update, :destroy]
 
   # GET /staffs
-  # GET /staffs.json
+  # GET /api/staffs
   def index
     @staffs = Staff.all
   end
 
-  # GET /staffs/search
-  # GET /staffs/search.json
+  # GET /api/staffs/searchs
   def search
     @q = Staff.ransack(parse_query_param)
     @staffs = @q.result(distinct: true)
   end
 
   # GET /staffs/1
-  # GET /staffs/1.json
+  # GET /api/staffs/1
   def show
   end
 
@@ -29,7 +28,7 @@ class StaffsController < ApplicationController
   end
 
   # POST /staffs
-  # POST /staffs.json
+  # POST /api/staffs
   def create
     @staff = Staff.new(staff_params)
 
@@ -45,7 +44,7 @@ class StaffsController < ApplicationController
   end
 
   # PATCH/PUT /staffs/1
-  # PATCH/PUT /staffs/1.json
+  # PATCH/PUT /api/staffs/1
   def update
     respond_to do |format|
       if @staff.update(staff_params)
@@ -59,7 +58,7 @@ class StaffsController < ApplicationController
   end
 
   # DELETE /staffs/1
-  # DELETE /staffs/1.json
+  # DELETE /api/staffs/1
   def destroy
     @staff.destroy
     respond_to do |format|
