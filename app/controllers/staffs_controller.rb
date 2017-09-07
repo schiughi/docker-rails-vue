@@ -1,6 +1,5 @@
 class StaffsController < ApplicationController
   before_action :set_staff, only: [:show, :edit, :update, :destroy]
-  before_action :parse_params , only: :search
 
   # GET /staffs
   # GET /staffs.json
@@ -11,7 +10,8 @@ class StaffsController < ApplicationController
   # GET /staffs/search
   # GET /staffs/search.json
   def search
-    @staffs = Staff.where("age > ?" , @query["age_gt"])
+    @q = Staff.ransack(parse_query_param)
+    @staffs = @q.result(distinct: true)
   end
 
   # GET /staffs/1
@@ -79,7 +79,7 @@ class StaffsController < ApplicationController
       params.fetch(:staff, {})
     end
 
-    def parse_params
-      @query = JSON.parse params[:q]
+    def parse_query_param
+      JSON.parse params[:q]
     end
 end
