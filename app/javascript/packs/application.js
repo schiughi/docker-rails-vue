@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
        columns: ["name" , "age" , "joined on"],
        staffs: [],
        query: {
-         age_gt: 20,
-         name_cont: "Mr"
+         age_gt: null,
+         name_cont: null
        }
      },
      created: function(){

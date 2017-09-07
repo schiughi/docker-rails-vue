@@ -1,5 +1,16 @@
 <div id="el-index">
   <h1>staffs</h1>
+  <div class="form">
+    <p>
+      <label for="name">名前：</label>
+      <input v-model="query.name_cont" name="name" placeholder="name like">
+    </p>
+    <p>
+      <label for="age">年齢：</label>
+      <input v-model.number="query.age_gt" type="number" name="age">
+    </p>
+    <button v-on:click="search">Search</button>
+  </div>
   <table>
     <thead>
       <tr>
