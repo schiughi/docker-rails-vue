@@ -9,7 +9,7 @@ class StaffsController < ApplicationController
 
   # GET /api/staffs/searchs
   def search
-    @q = Staff.ransack(parse_query_param)
+    @q = Staff.ransack(search_params)
     @staffs = @q.result(distinct: true)
   end
 
@@ -78,7 +78,7 @@ class StaffsController < ApplicationController
       params.fetch(:staff, {})
     end
 
-    def parse_query_param
+    def search_params
       JSON.parse params[:q]
     end
 end
