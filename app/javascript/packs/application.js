@@ -12,36 +12,36 @@ import axios from 'axios'
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
-     el: '#el-index',
-     data: {
-       columns: ["name" , "age" , "joined on"],
-       staffs: [],
-       query: {
-         age_gt: null,
-         name_cont: null
-       }
-     },
-     created: function(){
-        this.search()
-     },
-     methods:{
-       search: function(){
-         axios.get('/api/staffs/search',{
+    el: '#el-index',
+    data: {
+      columns: ["name" , "age" , "joined on"],
+      staffs: [],
+      query: {
+       age_gt: null,
+        name_cont: null
+      }
+    },
+    created: function(){
+      this.search()
+    },
+    methods:{
+      search: function(){
+        axios.get('/api/staffs/search',{
           headers: { 
             'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
-         },
+          },
           params:{
-           q: JSON.stringify(this.query)
+            q: JSON.stringify(this.query)
           }
-         })
-         .then((response) => {
+        })
+        .then((response) => {
           console.log(response);
           this.staffs = response.data.staffs;
         })
         .catch((error) => {
           console.log(error);
         })
-       }
-     }
-   })
+      }
+    }
+  })
 })
