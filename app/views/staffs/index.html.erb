@@ -1,15 +1,32 @@
 <div id="el-index">
   <h1>staffs</h1>
-  <div class="search-form">
-    <p>
-      <label for="search-name">名前：</label>
-      <input id="search-name" v-model="query.name_cont" @keyup.enter="search" placeholder="name like">
-    </p>
-    <p>
-      <label for="search-age">年齢：</label>
-      <input id="search-age" v-model.number="query.age_gt" @keyup.enter="search" type="number" placeholder="age">
-    </p>
-    <button v-on:click="search">Search</button>
+  <div class="search-form-static">
+  <el-form ref="form" :model="form" label-width="120px">
+    <el-form-item label="名前">
+      <el-input v-model="query.name_cont" placeholder="input name"></el-input>
+    </el-form-item>
+    <el-form-item label="年齢">
+      <el-col :span="11">
+        <el-input-number v-model="query.age_gt" :min="1" placeholder="age min"></el-input-number>
+      </el-col>
+      <el-col class="line" :span="2">-</el-col>
+      <el-col :span="11">
+        <el-input-number v-model="query.age_lteq" :min="1" placeholder="age max"></el-input-number>
+      </el-col>
+    </el-form-item>
+    <el-form-item label="入社日">
+      <el-col :span="11">
+        <el-date-picker v-model="query.joined_on_gt" type="date" placeholder="日時を選択してください"></el-date-picker>
+      </el-col>
+      <el-col class="line" :span="2">-</el-col>
+      <el-col :span="11">
+        <el-date-picker v-model="query.joined_on_lteq" type="date" placeholder="日時を選択してください"></el-date-picker>
+      </el-col>
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="search">search</el-button>
+    </el-form-item>
+  </el-form>
   </div>
   <table>
     <thead>

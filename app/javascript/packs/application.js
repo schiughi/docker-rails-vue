@@ -9,6 +9,12 @@
 
 import Vue from 'vue/dist/vue.esm'
 import axios from 'axios'
+import ElementUI from 'element-ui'
+import locale from 'element-ui/lib/locale/lang/ja'
+import 'element-ui/lib/theme-default/index.css'
+import '../src/styles/style.scss'
+
+Vue.use(ElementUI, { locale })
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
@@ -17,8 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
       columns: ["name" , "age" , "joined on"],
       staffs: [],
       query: {
-       age_gt: null,
-        name_cont: null
+        name_cont: null,
+        age_gt: null,
+        age_lteq: null,
+        joined_on_gt: null,
+        joined_on_lteq: null
       }
     },
     created: function(){
