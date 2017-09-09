@@ -1,26 +1,34 @@
 <div id="el-index">
   <h1>staffs</h1>
   <div class="search-form-static">
-  <el-form ref="form" :model="form" label-width="120px">
+  <el-form ref="form" :model="query" label-width="120px">
     <el-form-item label="名前">
       <el-input v-model="query.name_cont" placeholder="input name"></el-input>
     </el-form-item>
     <el-form-item label="年齢">
       <el-col :span="11">
-        <el-input-number v-model="query.age_gt" :min="1" placeholder="age min"></el-input-number>
+        <el-input-number v-model="query.age_gt"></el-input-number>
       </el-col>
       <el-col class="line" :span="2">-</el-col>
       <el-col :span="11">
-        <el-input-number v-model="query.age_lteq" :min="1" placeholder="age max"></el-input-number>
+        <el-input-number v-model="query.age_lteq" :max="150"></el-input-number>
       </el-col>
     </el-form-item>
     <el-form-item label="入社日">
       <el-col :span="11">
-        <el-date-picker v-model="query.joined_on_gt" type="date" placeholder="日時を選択してください"></el-date-picker>
+        <el-date-picker
+          v-model="query.joined_on_gt"
+          type="date"
+          placeholder="日時を選択してください">
+        </el-date-picker>
       </el-col>
       <el-col class="line" :span="2">-</el-col>
       <el-col :span="11">
-        <el-date-picker v-model="query.joined_on_lteq" type="date" placeholder="日時を選択してください"></el-date-picker>
+        <el-date-picker
+          v-model="query.joined_on_lteq"
+          type="date"
+          placeholder="日時を選択してください">
+        </el-date-picker>
       </el-col>
     </el-form-item>
     <el-form-item>
@@ -28,18 +36,24 @@
     </el-form-item>
   </el-form>
   </div>
-  <table>
-    <thead>
-      <tr>
-        <th v-for="column in columns">{{ column }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="staff in staffs">
-        <td>{{ staff.name }}</td>
-        <td>{{ staff.age }}</td>
-        <td>{{ staff.joined_on }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <el-table
+    :data="staffs"
+    height="400"
+    stripe
+    style="width: 100%">
+    <el-table-column
+      prop="name"
+      label="名前"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="age"
+      label="年齢"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="joined_on"
+      label="入社日">
+    </el-table-column>
+  </el-table>
 </div>
