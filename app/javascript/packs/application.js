@@ -19,15 +19,16 @@ Vue.use(ElementUI, { locale })
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     el: '#el-index',
-    data: {
-      columns: ["name" , "age" , "joined on"],
-      staffs: [],
-      query: {
-        name_cont: null,
-        age_gt: null,
-        age_lteq: null,
-        joined_on_gt: null,
-        joined_on_lteq: null
+    data: function(){ 
+      return {
+        staffs: [],
+        query: {
+          name_cont: null,
+          age_gt: 0,
+          age_lteq: 100,
+          joined_on_gt: null,
+          joined_on_lteq: null
+        }
       }
     },
     created: function(){
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
           },
           params:{
-            q: JSON.stringify(this.query)
+            q: this.query
           }
         })
         .then((response) => {

@@ -7,11 +7,11 @@
     </el-form-item>
     <el-form-item label="年齢">
       <el-col :span="11">
-        <el-input-number v-model="query.age_gt"></el-input-number>
+        <el-input-number v-model="query.age_gt" :min="0" :max="150"></el-input-number>
       </el-col>
       <el-col class="line" :span="2">-</el-col>
       <el-col :span="11">
-        <el-input-number v-model="query.age_lteq" :max="150"></el-input-number>
+        <el-input-number v-model="query.age_lteq" :min="0" :max="150"></el-input-number>
       </el-col>
     </el-form-item>
     <el-form-item label="入社日">
