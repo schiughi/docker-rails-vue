@@ -36,6 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
       this.search()
     },
     methods:{
+      notificate: function(msg){
+        this.$notify({
+          type: 'error',
+          title: 'Error',
+          message: msg
+        });
+      },
       search: function(){
         axios.get('/api/staffs/search',{
           headers: { 
@@ -54,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch((error) => {
           console.log(error);
+          this.notificate(error.message);
         })
       }
     }
