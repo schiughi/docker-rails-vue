@@ -7,7 +7,7 @@ class StaffsController < ApplicationController
     @staffs = Staff.all
   end
 
-  # GET /api/staffs/searchs
+  # GET /api/staffs/search
   def search
     @q = Staff.ransack(search_params)
     @staffs = @q.result(distinct: true)
