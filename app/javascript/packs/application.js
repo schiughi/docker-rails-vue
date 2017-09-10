@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.search()
     },
     methods:{
-      notificate: function(msg){
+      notify: function(msg){
         this.$notify({
           type: 'error',
           title: 'Error',
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch((error) => {
           console.log(error);
-          this.notificate(error.message);
+          this.notify(error.message);
         })
       }
     }
