@@ -9,6 +9,7 @@
 
 import Vue from 'vue/dist/vue.esm'
 import axios from 'axios'
+import Qs from 'qs'
 import ElementUI from 'element-ui'
 import locale from 'element-ui/lib/locale/lang/ja'
 import 'element-ui/lib/theme-default/index.css'
@@ -42,6 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
           },
           params:{
             q: this.query
+          },
+          paramsSerializer: function(params) {
+            return Qs.stringify(params, {arrayFormat: 'brackets'})
           }
         })
         .then((response) => {

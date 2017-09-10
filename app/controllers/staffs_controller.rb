@@ -79,6 +79,6 @@ class StaffsController < ApplicationController
     end
 
     def search_params
-      JSON.parse params[:q]
+      params.require(:q).permit(:name_cont , :age_gt , :age_lteq , :joined_on_gt, :joined_on_lteq)
     end
 end
