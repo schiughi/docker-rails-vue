@@ -8,62 +8,40 @@
 // layout file, like app/views/layouts/application.html.erb
 
 import Vue from 'vue/dist/vue.esm'
-import axios from 'axios'
+import Axios from 'axios'
 import Qs from 'qs'
 import ElementUI from 'element-ui'
 import locale from 'element-ui/lib/locale/lang/ja'
 import 'element-ui/lib/theme-default/index.css'
 import '../src/styles/style.scss'
+import Staffs from '../src/components/staffs.vue'
+import VueRouter from 'vue-router'
+
+
+Vue.use(VueRouter)
 
 Vue.use(ElementUI, { locale })
 
-document.addEventListener('DOMContentLoaded', () => {
-  const app = new Vue({
-    el: '#el-index',
-    data: function(){ 
-      return {
-        staffs: [],
-        query: {
-          name_cont: null,
-          age_gt: 0,
-          age_lteq: 100,
-          joined_on_gt: null,
-          joined_on_lteq: null
-        }
-      }
-    },
-    created: function(){
-      this.search()
-    },
-    methods:{
-      notify: function(msg){
-        this.$notify({
-          type: 'error',
-          title: 'Error',
-          message: msg
-        });
-      },
-      search: function(){
-        axios.get('/api/staffs/search',{
-          headers: { 
-            'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
-          },
-          params:{
-            q: this.query
-          },
-          paramsSerializer: function(params) {
-            return Qs.stringify(params, {arrayFormat: 'brackets'})
-          }
-        })
-        .then((response) => {
-          console.log(response);
-          this.staffs = response.data.staffs;
-        })
-        .catch((error) => {
-          console.log(error);
-          this.notify(error.message);
-        })
-      }
-    }
-  })
+const axios = Axios.create({
+  headers: { 
+    'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+  },
+  paramsSerializer: function(params) {
+    return Qs.stringify(params, {arrayFormat: 'brackets'})
+  }
 })
+Vue.prototype.$http = axios
+
+const Bar = { template: '<div>bar</div>' }
+
+const routes = [
+  { path: '/staffs', component: Staffs },
+  { path: '/bar', component: Bar }
+]
+const router = new VueRouter({
+  routes
+})
+
+const app = new Vue({
+  router
+}).$mount('#app')
