@@ -1,10 +1,10 @@
 class StaffsController < ApplicationController
   before_action :set_staff, only: [:show, :edit, :update, :destroy]
+  # skip_before_action :authenticate_user! , only: :index
 
   # GET /staffs
   # GET /api/staffs
   def index
-    @staffs = Staff.all
   end
 
   # GET /api/staffs/search

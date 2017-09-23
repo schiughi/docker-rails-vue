@@ -90,7 +90,7 @@
       },
       search: function(){
         this.$http.get('/api/staffs/search',{
-          params:{
+          params: {
             q: this.query
           }
         })

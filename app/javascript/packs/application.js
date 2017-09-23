@@ -8,21 +8,24 @@
 // layout file, like app/views/layouts/application.html.erb
 
 import Vue from 'vue/dist/vue.esm'
-import Axios from 'axios'
+import axios from 'axios'
 import Qs from 'qs'
 import ElementUI from 'element-ui'
 import locale from 'element-ui/lib/locale/lang/ja'
 import 'element-ui/lib/theme-default/index.css'
 import '../src/styles/style.scss'
-import Staffs from '../src/components/staffs.vue'
+import Staffs from '../src/pages/staffs.vue'
+import LogIn from '../src/pages/log_in.vue'
+import LogOut from '../src/components/sign_out.vue'
 import VueRouter from 'vue-router'
-
+import stored from '../src/store/index.js'
+import Vuex from 'vuex'
 
 Vue.use(VueRouter)
-
 Vue.use(ElementUI, { locale })
+Vue.use(Vuex)
 
-const axios = Axios.create({
+Vue.prototype.$http = axios.create({
   headers: { 
     'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
   },
@@ -30,18 +33,28 @@ const axios = Axios.create({
     return Qs.stringify(params, {arrayFormat: 'brackets'})
   }
 })
-Vue.prototype.$http = axios
 
-const Bar = { template: '<div>bar</div>' }
+Vue.prototype.$http.interceptors.request.use(
+  function (config) {
+    console.log(config)
+    return config;
+  }, function (error) {
+    return Promise.reject(error);
+  }
+)
 
 const routes = [
   { path: '/staffs', component: Staffs },
-  { path: '/bar', component: Bar }
+  { path: '/log-in', component: LogIn },
+  { path: '/log-out', component: LogOut }
 ]
 const router = new VueRouter({
   routes
 })
+const store = new Vuex.Store(stored)
 
+console.log(store)
 const app = new Vue({
-  router
+  router,
+  store
 }).$mount('#app')

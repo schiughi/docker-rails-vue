@@ -34,6 +34,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'devise'
+gem 'devise_token_auth'
+gem 'omniauth'
+
 gem 'ransack'
 
 group :development, :test do
